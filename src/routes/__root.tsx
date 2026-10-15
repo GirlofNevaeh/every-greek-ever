@@ -1,10 +1,19 @@
 import { createRootRoute, HeadContent, Outlet, Scripts } from "@tanstack/react-router";
 import { AuthProvider } from "@/lib/auth/provider";
 import { PreviewHostBridge } from "@/components/preview-host-bridge";
+import { UnlockProvider } from "@/components/paywall";
 import { I18nProvider } from "@/lib/i18n";
+import { readUnlock } from "@/lib/paywall.functions";
 import appCss from "../styles.css?url";
 
 export const Route = createRootRoute({
+  loader: async () => {
+    try {
+      return await readUnlock();
+    } catch {
+      return { ok: false };
+    }
+  },
   head: () => ({
     meta: [
       { charSet: "utf-8" },
@@ -30,7 +39,12 @@ export const Route = createRootRoute({
       },
     ],
   }),
-  component: () => (
+  component: Root,
+});
+
+function Root() {
+  const { ok } = Route.useLoaderData();
+  return (
     <html lang="en" suppressHydrationWarning>
       <head>
         <HeadContent />
@@ -39,11 +53,13 @@ export const Route = createRootRoute({
         <PreviewHostBridge />
         <AuthProvider>
           <I18nProvider>
-            <Outlet />
+            <UnlockProvider unlocked={ok}>
+              <Outlet />
+            </UnlockProvider>
           </I18nProvider>
         </AuthProvider>
         <Scripts />
       </body>
     </html>
-  ),
-});
+  );
+}

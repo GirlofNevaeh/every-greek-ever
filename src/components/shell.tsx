@@ -3,6 +3,7 @@ import { Link, useRouterState } from "@tanstack/react-router";
 import { LANGS, useI18n } from "@/lib/i18n";
 import { NAV } from "@/data/catalog";
 import { SearchBox } from "@/components/search-box";
+import { Paywall, useUnlock } from "@/components/paywall";
 
 export function Shell({
   children,
@@ -12,7 +13,10 @@ export function Shell({
   search?: boolean;
 }) {
   const { t, lang, setLang } = useI18n();
+  const { unlocked } = useUnlock();
   const path = useRouterState({ select: (state) => state.location.pathname });
+  const bare = path.length > 1 ? path.replace(/\/$/, "") : path;
+  const locked = bare !== "/" && !unlocked;
   const [openLang, setOpenLang] = useState(false);
   const [openPhone, setOpenPhone] = useState(false);
   const label = LANGS.find(([id]) => id === lang)?.[1] ?? "English";
@@ -75,7 +79,7 @@ export function Shell({
           </div>
         </div>
         <p className="mt-1 text-sm font-semibold">{t("ui.ages")}</p>
-        {search ? (
+        {search && !locked ? (
           <div className="mt-3">
             <SearchBox />
           </div>
@@ -97,7 +101,7 @@ export function Shell({
         </nav>
       </header>
       <main id="main" className="mx-auto w-full max-w-5xl px-4 py-6">
-        {children}
+        {locked ? <Paywall /> : children}
       </main>
       <footer className="mx-auto w-full max-w-5xl px-4 pb-10">
         <p className="max-w-xl text-base">{t("foot.why")}</p>

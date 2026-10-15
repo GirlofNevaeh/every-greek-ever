@@ -20,7 +20,7 @@ function PeoplePage() {
       <Link
         to={href.to}
         params={href.params}
-        className="mt-5 grid gap-4 rounded-[2rem] border-2 border-blue bg-card p-4 sm:grid-cols-[180px_1fr]"
+        className="mt-5 grid grid-cols-[7.5rem_1fr] items-center gap-3 rounded-[2rem] border-2 border-blue bg-card p-4 sm:grid-cols-[11rem_1fr] sm:gap-4"
       >
         <Portrait hair={first.hair} woman={first.woman} prop={first.prop} label={nice(first.id)} />
         <span>
@@ -34,14 +34,16 @@ function PeoplePage() {
           const link = personHref(person.id);
           return (
             <li key={person.id}>
-              <Link to={link.to} params={link.params} className="grid min-h-16 grid-cols-[88px_1fr_auto] items-center gap-3 px-3 py-2">
-                <span className="text-sm font-bold break-words">{t(`person.${person.id}.years`)}</span>
+              <Link to={link.to} params={link.params} className="flex min-h-16 items-center gap-3 px-3 py-3">
+                <span className="grid size-14 shrink-0 place-items-center overflow-hidden">
+                  <span className="w-14">
+                    <Portrait hair={person.hair} woman={person.woman} prop={person.prop} frame="tondo" label="" />
+                  </span>
+                </span>
                 <span className="min-w-0">
                   <span className="block font-display text-2xl leading-tight">{nice(person.id)}</span>
                   <span className="block text-sm break-words">{t(`person.${person.id}.role`)}</span>
-                </span>
-                <span className="size-14">
-                  <Portrait hair={person.hair} woman={person.woman} prop={person.prop} frame="tondo" label="" />
+                  <span className="mt-1 block text-sm font-bold text-blue">{t(`person.${person.id}.years`)}</span>
                 </span>
               </Link>
             </li>

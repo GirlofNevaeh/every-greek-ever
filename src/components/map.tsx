@@ -41,26 +41,27 @@ export function GreeceMap() {
             <ellipse cx="555" cy="410" rx="16" ry="11" fill={blue} />
             <ellipse cx="560" cy="510" rx="24" ry="16" fill={blue} />
             <path fill={blue} d="M530 70 L630 60 L640 170 L545 180 Z" />
-            <text x="200" y="80" fill={card} fontSize="18" fontFamily="Lexend, sans-serif">
-              {t("map.macedon")}
-            </text>
-            <text x="300" y="766" fill={card} fontSize="18" fontFamily="Lexend, sans-serif">
-              {t("map.crete")}
-            </text>
-            <text x="430" y="300" fill={ink} fontSize="16" fontFamily="Lexend, sans-serif">
-              {t("map.aegean")}
-            </text>
           </svg>
+          <span className="pointer-events-none absolute top-[5%] left-[24%] text-sm font-bold text-white [text-shadow:0_1px_2px_rgb(0_0_0_/_55%)]">
+            {t("map.macedon")}
+          </span>
+          <span className="pointer-events-none absolute top-[83%] left-[18%] text-sm font-bold">
+            {t("map.crete")}
+          </span>
+          <span className="pointer-events-none absolute top-[68%] left-[42%] text-sm font-semibold">
+            {t("map.aegean")}
+          </span>
           {here.map((place) => (
             <Link
               key={place.id}
               to="/places/$id"
               params={{ id: place.id }}
               aria-label={nice(place.id)}
-              className="absolute grid size-11 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full border-2 border-ink bg-card"
+              className="absolute grid size-11 -translate-x-1/2 -translate-y-1/2 place-items-center"
               style={{ left: `${(place.x / 640) * 100}%`, top: `${(place.y / 860) * 100}%` }}
             >
-              <span className="size-3 rounded-full bg-blue" aria-hidden="true" />
+              <span className="size-4 rounded-full border-2 border-ink bg-card shadow-sm" aria-hidden="true" />
+              <span className="absolute size-2 rounded-full bg-blue" aria-hidden="true" />
             </Link>
           ))}
         </div>

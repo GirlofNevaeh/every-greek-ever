@@ -30,7 +30,7 @@ function ThinkersPage() {
       <ul className="mt-6 grid gap-3 md:grid-cols-3">
         {thinkers.map((person) => (
           <li key={person.id}>
-            <Link to="/thinkers/$id" params={{ id: person.id }} className="block rounded-[2rem] bg-blue p-3 text-white">
+            <Link to="/thinkers/$id" params={{ id: person.id }} className="grid grid-cols-[6.5rem_1fr] items-center gap-3 rounded-[2rem] bg-blue p-3 text-white md:grid-cols-1">
               <Portrait hair={person.hair} woman={person.woman} prop={person.prop} frame="ask" label={nice(person.id)} />
               <span className="mt-2 block font-display text-3xl">{nice(person.id)}</span>
               <span className="block text-sm">{t(`person.${person.id}.role`)}</span>

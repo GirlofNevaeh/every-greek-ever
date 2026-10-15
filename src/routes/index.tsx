@@ -67,6 +67,8 @@ function Home() {
         ))}
       </div>
 
+      <p className="mt-4 max-w-xl text-lg">{t("pay.homeHint")}</p>
+
       <div className="mt-6 grid gap-3 md:grid-cols-2">
         <article className="rounded-3xl border-2 border-ink bg-card p-5">
           <p className="text-sm font-bold tracking-wide text-blue">{t("ui.fact")}</p>

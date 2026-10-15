@@ -182,10 +182,12 @@ function QuestionCard({
   return (
     <section className="mx-auto mt-4 max-w-xl">
       <p className="text-sm font-bold">
-        {t("ui.question")} {index} {t("ui.of")} 250
-        <span className="ml-2">
-          {cursor + 1}/{total}
-        </span>
+        {t("ui.question")} {index}
+        {total > 1 ? (
+          <span className="ml-2">
+            {cursor + 1} {t("ui.of")} {total}
+          </span>
+        ) : null}
       </p>
       <div className="mt-2 overflow-hidden rounded-[2rem] border-2 border-blue bg-card">
         <div className="bg-blue px-4 py-2 text-sm font-bold text-white">{t("ui.choose")}</div>

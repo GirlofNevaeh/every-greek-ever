@@ -24,7 +24,7 @@ function PersonPage() {
   return (
     <Shell>
       <p className="text-sm font-bold text-blue">{t("ui.realPerson")}</p>
-      <div className="mt-3 grid items-start gap-4 md:grid-cols-[240px_1fr]">
+      <div className="mt-3 grid grid-cols-[7.5rem_1fr] items-start gap-3 sm:grid-cols-[11rem_1fr] md:grid-cols-[15rem_1fr]">
         <Portrait hair={person.hair} woman={person.woman} prop={person.prop} frame="stele" label={nice(person.id)} />
         <div>
           <p className="inline-block rounded-full bg-blue px-3 py-1 text-sm font-bold text-white">{t("ui.years")}: {t(`person.${person.id}.years`)}</p>

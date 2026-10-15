@@ -25,7 +25,7 @@ function ThinkerPage() {
       <p className="text-sm font-bold">{t("ui.realPerson")}</p>
       <h1 className="mt-2 font-display text-5xl leading-none">{nice(person.id)}</h1>
       <p className="mt-2 text-lg">{t("thinkers.intro")}</p>
-      <div className="mt-4 grid gap-4 md:grid-cols-[220px_1fr]">
+      <div className="mt-4 grid grid-cols-[7.5rem_1fr] items-start gap-3 sm:grid-cols-[11rem_1fr]">
         <Portrait hair={person.hair} woman={false} prop={person.prop} frame="ask" label={nice(person.id)} />
         <div className="grid gap-3">
           <p className="rounded-full bg-blue px-3 py-1 text-sm font-bold text-white w-fit">{t(`person.${person.id}.years`)}</p>

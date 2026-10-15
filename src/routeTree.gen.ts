@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as QuizRouteImport } from './routes/quiz'
 import { Route as TimeRouteImport } from './routes/time'
+import { Route as UnlockRouteImport } from './routes/unlock'
 import { Route as WorkRouteImport } from './routes/work'
 import { Route as GodsIndexRouteImport } from './routes/gods/index'
 import { Route as GodsIdRouteImport } from './routes/gods/$id'
@@ -37,6 +38,11 @@ const QuizRoute = QuizRouteImport.update({
 const TimeRoute = TimeRouteImport.update({
   id: '/time',
   path: '/time',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const UnlockRoute = UnlockRouteImport.update({
+  id: '/unlock',
+  path: '/unlock',
   getParentRoute: () => rootRouteImport,
 } as any)
 const WorkRoute = WorkRouteImport.update({
@@ -99,6 +105,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/quiz': typeof QuizRoute
   '/time': typeof TimeRoute
+  '/unlock': typeof UnlockRoute
   '/work': typeof WorkRoute
   '/gods/$id': typeof GodsIdRoute
   '/myths/$id': typeof MythsIdRoute
@@ -115,6 +122,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/quiz': typeof QuizRoute
   '/time': typeof TimeRoute
+  '/unlock': typeof UnlockRoute
   '/work': typeof WorkRoute
   '/gods/$id': typeof GodsIdRoute
   '/myths/$id': typeof MythsIdRoute
@@ -132,6 +140,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/quiz': typeof QuizRoute
   '/time': typeof TimeRoute
+  '/unlock': typeof UnlockRoute
   '/work': typeof WorkRoute
   '/gods/$id': typeof GodsIdRoute
   '/myths/$id': typeof MythsIdRoute
@@ -150,6 +159,7 @@ export interface FileRouteTypes {
     | '/'
     | '/quiz'
     | '/time'
+    | '/unlock'
     | '/work'
     | '/gods/$id'
     | '/myths/$id'
@@ -166,6 +176,7 @@ export interface FileRouteTypes {
     | '/'
     | '/quiz'
     | '/time'
+    | '/unlock'
     | '/work'
     | '/gods/$id'
     | '/myths/$id'
@@ -182,6 +193,7 @@ export interface FileRouteTypes {
     | '/'
     | '/quiz'
     | '/time'
+    | '/unlock'
     | '/work'
     | '/gods/$id'
     | '/myths/$id'
@@ -199,6 +211,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   QuizRoute: typeof QuizRoute
   TimeRoute: typeof TimeRoute
+  UnlockRoute: typeof UnlockRoute
   WorkRoute: typeof WorkRoute
   GodsIdRoute: typeof GodsIdRoute
   MythsIdRoute: typeof MythsIdRoute
@@ -233,6 +246,13 @@ declare module '@tanstack/react-router' {
       path: '/time'
       fullPath: '/time'
       preLoaderRoute: typeof TimeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/unlock': {
+      id: '/unlock'
+      path: '/unlock'
+      fullPath: '/unlock'
+      preLoaderRoute: typeof UnlockRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/work': {
@@ -319,6 +339,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   QuizRoute: QuizRoute,
   TimeRoute: TimeRoute,
+  UnlockRoute: UnlockRoute,
   WorkRoute: WorkRoute,
   GodsIdRoute: GodsIdRoute,
   MythsIdRoute: MythsIdRoute,
