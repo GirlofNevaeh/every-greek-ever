@@ -1,0 +1,5 @@
+{
+  "framework": null,
+  "installCommand": "npm ci --omit=dev --no-audit --no-fund",
+  "buildCommand": "npm run build"
+}
