@@ -1,8 +1,9 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { Shell } from "@/components/shell";
 import { questions, type Q, type Topic } from "@/data/quiz";
 import { useI18n } from "@/lib/i18n";
+import { armQuizSounds, playCheer, playFart } from "@/lib/quiz-sounds";
 
 export const Route = createFileRoute("/quiz")({
   component: QuizPage,
@@ -37,6 +38,10 @@ function QuizPage() {
   const [mode, setMode] = useState<"pick" | "play" | "done">("pick");
   const [pack, setPack] = useState<Q[]>([]);
   const [jump, setJump] = useState("1");
+
+  useEffect(() => {
+    armQuizSounds();
+  }, []);
 
   const filtered = useMemo(
     () => (topic === "all" ? questions : questions.filter((item) => item.topic === topic)),
@@ -141,7 +146,12 @@ function QuizPage() {
           onPick={(choice) => {
             if (picked !== null) return;
             setPicked(choice);
-            if (choice === current.answer) setScore((value) => value + 1);
+            if (choice === current.answer) {
+              setScore((value) => value + 1);
+              playCheer();
+            } else {
+              playFart();
+            }
           }}
           onNext={() => {
             if (cursor + 1 >= pack.length) {
@@ -182,12 +192,7 @@ function QuestionCard({
   return (
     <section className="mx-auto mt-4 max-w-xl">
       <p className="text-sm font-bold">
-        {t("ui.question")} {index}
-        {total > 1 ? (
-          <span className="ml-2">
-            {cursor + 1} {t("ui.of")} {total}
-          </span>
-        ) : null}
+        {total > 1 ? `${t("ui.question")} ${cursor + 1} ${t("ui.of")} ${total}` : `${t("ui.question")} ${index}`}
       </p>
       <div className="mt-2 overflow-hidden rounded-[2rem] border-2 border-blue bg-card">
         <div className="bg-blue px-4 py-2 text-sm font-bold text-white">{t("ui.choose")}</div>
