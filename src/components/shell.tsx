@@ -158,6 +158,24 @@ export function Why({ k, vars }: { k: string; vars?: Record<string, string> }) {
   );
 }
 
+const personFactKeys = ["a", "b", "c", "d", "e"] as const;
+
+export function PersonFacts({ id }: { id: string }) {
+  const { t } = useI18n();
+  return (
+    <ul className="mt-4 grid gap-3">
+      {personFactKeys.map((part, index) => (
+        <li
+          key={part}
+          className={`rounded-2xl p-4 text-lg ${index % 2 ? "border-2 border-blue bg-paper" : "border-2 border-ink bg-card"}`}
+        >
+          {t(`person.${id}.${part}`)}
+        </li>
+      ))}
+    </ul>
+  );
+}
+
 export function Pager({
   prev,
   next,

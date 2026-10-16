@@ -8,7 +8,7 @@ export const Route = createFileRoute("/work")({
   component: WorkPage,
 });
 
-const sortLines = ["sheet.fact1", "sheet.fact2", "sheet.fact3", "sheet.fact4", "sheet.fact5", "sheet.fact6"];
+const sortLines = ["sheet.fact1", "sheet.fact2", "sheet.fact3", "sheet.fact4", "sheet.fact5", "sheet.fact6", "sheet.fact7", "sheet.fact8"];
 
 function WorkPage() {
   const { t } = useI18n();

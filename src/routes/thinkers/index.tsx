@@ -34,6 +34,7 @@ function ThinkersPage() {
               <Portrait hair={person.hair} woman={person.woman} prop={person.prop} frame="ask" label={nice(person.id)} />
               <span className="mt-2 block font-display text-3xl">{nice(person.id)}</span>
               <span className="block text-sm">{t(`person.${person.id}.role`)}</span>
+              <span className="mt-1 block text-sm">{t(`person.${person.id}.c`)}</span>
             </Link>
           </li>
         ))}

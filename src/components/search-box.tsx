@@ -68,7 +68,9 @@ export function SearchBox({ large = false }: { large?: boolean }) {
         label: nice(person.id),
         to,
         params: { id: person.id },
-        hay: norm(`${person.id} ${nice(person.id)} ${en[`person.${person.id}.role`] ?? ""} ${en[`person.${person.id}.a`] ?? ""} ${t(`person.${person.id}.role`)} ${EXTRA[person.id] ?? ""}`),
+        hay: norm(
+          `${person.id} ${nice(person.id)} ${["role", "a", "b", "c", "d", "e"].map((part) => en[`person.${person.id}.${part}`] ?? "").join(" ")} ${t(`person.${person.id}.role`)} ${EXTRA[person.id] ?? ""}`,
+        ),
       });
     }
     for (const god of gods) {

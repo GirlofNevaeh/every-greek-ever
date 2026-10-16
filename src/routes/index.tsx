@@ -2,7 +2,7 @@ import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { Shell } from "@/components/shell";
 import { SearchBox } from "@/components/search-box";
 import { KeyStrip, Portrait, SymbolBadge } from "@/components/art";
-import { allPeople, gods, myths } from "@/data/catalog";
+import { allPeople, gods, myths, nice, personHref } from "@/data/catalog";
 import { useI18n } from "@/lib/i18n";
 
 export const Route = createFileRoute("/")({
@@ -79,6 +79,21 @@ function Home() {
           <p className="mt-2 text-xl leading-snug">{t("home.story")}</p>
         </article>
       </div>
+
+      <h2 className="mt-8 font-display text-3xl">{t("home.people")}</h2>
+      <ul className="mt-3 grid gap-3 sm:grid-cols-2">
+        {allPeople.map((person) => {
+          const href = personHref(person.id);
+          return (
+            <li key={person.id}>
+              <Link to={href.to} params={href.params} className="block h-full rounded-3xl border-2 border-blue bg-card p-4">
+                <span className="font-display text-2xl">{nice(person.id)}</span>
+                <span className="mt-1 block text-base">{t(`person.${person.id}.c`)}</span>
+              </Link>
+            </li>
+          );
+        })}
+      </ul>
     </Shell>
   );
 }

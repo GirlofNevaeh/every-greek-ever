@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Pager, Shell, Why } from "@/components/shell";
 import { Portrait } from "@/components/art";
-import { neighbors, nice, places } from "@/data/catalog";
+import { allPeople, neighbors, nice, personHref, places } from "@/data/catalog";
 import { useI18n } from "@/lib/i18n";
 
 export const Route = createFileRoute("/places/$id")({
@@ -20,6 +20,7 @@ function PlacePage() {
     );
   }
   const { prev, next } = neighbors(places, id);
+  const locals = allPeople.filter((person) => person.place === place.id);
   return (
     <Shell>
       <Link to="/places" className="text-sm font-bold text-blue">
@@ -32,6 +33,25 @@ function PlacePage() {
       <p className="mt-3 text-lg">{t(`place.${place.id}.a`)}</p>
       <p className="mt-2 text-lg">{t(`place.${place.id}.b`)}</p>
       <Why k={`place.${place.id}.why`} />
+      {locals.length ? (
+        <section className="mt-6">
+          <h2 className="font-display text-3xl">{t("people.fromHere")}</h2>
+          <ul className="mt-3 grid gap-3">
+            {locals.map((person) => {
+              const href = personHref(person.id);
+              return (
+                <li key={person.id}>
+                  <Link to={href.to} params={href.params} className="block rounded-3xl border-2 border-blue bg-card p-4">
+                    <span className="font-display text-2xl">{nice(person.id)}</span>
+                    <span className="mt-1 block text-base">{t(`person.${person.id}.b`)}</span>
+                    <span className="mt-1 block text-base">{t(`person.${person.id}.c`)}</span>
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
+        </section>
+      ) : null}
       <Pager
         prev={prev ? { to: "/places/$id", id: prev.id, label: nice(prev.id) } : undefined}
         next={next ? { to: "/places/$id", id: next.id, label: nice(next.id) } : undefined}

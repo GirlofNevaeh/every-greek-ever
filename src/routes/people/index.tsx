@@ -27,6 +27,7 @@ function PeoplePage() {
           <span className="inline-block rounded-full bg-blue px-3 py-1 text-sm font-bold text-white">{t(`person.${first.id}.years`)}</span>
           <span className="mt-3 block font-display text-4xl">{nice(first.id)}</span>
           <span className="mt-2 block text-lg">{t(`person.${first.id}.role`)}</span>
+          <span className="mt-2 block text-base">{t(`person.${first.id}.c`)}</span>
         </span>
       </Link>
       <ul className="mt-4 divide-y divide-line overflow-hidden rounded-3xl border-2 border-blue bg-card">
@@ -43,6 +44,7 @@ function PeoplePage() {
                 <span className="min-w-0">
                   <span className="block font-display text-2xl leading-tight">{nice(person.id)}</span>
                   <span className="block text-sm break-words">{t(`person.${person.id}.role`)}</span>
+                  <span className="mt-1 block text-sm break-words">{t(`person.${person.id}.c`)}</span>
                   <span className="mt-1 block text-sm font-bold text-blue">{t(`person.${person.id}.years`)}</span>
                 </span>
               </Link>
